@@ -14,15 +14,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+            {% if request.user.is_staff %}
+                {#todo need to fix is_staff to something better#}
             <li class="nav-item active">
                 <a class="nav-link" href="{%  url 'home' %}">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'products' %}">Products</a>
             </li>
+            {% endif %}
         </ul>
     </div>
 
     <span id="hello-msg">Hello, {{ request.user }} </span>
     <span><a id="hello-msg"  href="{% url 'logout' %}">  Logout</a> </span>
 </nav>
+
