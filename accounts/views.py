@@ -18,19 +18,14 @@ from .decorators import unauthenticated_user, allowed_users, admin_only
 
 @unauthenticated_user  #this only allows unauthenticated user to view the page, authenticated user get redirected to homepage
 def registerPage(request):
-    form = CreateUserForm()
 
+    form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            group = Group.objects.get(name = 'customer')   #adds new registered to customer group
-            user.groups.add(group)
-            Customer.objects.create(
-                user = user,
-                name=user.username,
-            )
+
 
             messages.success(request,'Account was created for ' + username)
 
